@@ -17,6 +17,7 @@ jobs:
           github_user_name: nacker
           outputs: |
             dist/github-snake.gif
+            dist/github-snake.gif
 
       # 部署到 output 分支
       - uses: crazy-max/ghaction-github-pages@v3
