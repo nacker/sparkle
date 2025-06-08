@@ -1,0 +1,27 @@
+name: Generate Snake Contribution
+
+on:
+  # 每天 UTC 时间 00:00 运行一次
+  schedule:
+    - cron: "0 0 * * *"
+  # 也允许你手动触发
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      # 生成贪吃蛇 SVG 动画
+      - uses: Platane/snk@v3
+        with:
+          github_user_name: nacker
+          outputs: |
+            dist/github-snake.gif
+
+      # 部署到 output 分支
+      - uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
